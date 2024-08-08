@@ -2,6 +2,7 @@ package analytics
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -95,6 +96,9 @@ func (m *message) setSentAt(ts time.Time, maxBytes int) (err error) {
 	case Track:
 		msg.SentAt = ts
 		m.msg = msg
+	default:
+		err = fmt.Errorf("messages with custom types cannot be enqueued: %T", msg)
+		return
 	}
 
 	if m.json, err = json.Marshal(m.msg); err == nil {
