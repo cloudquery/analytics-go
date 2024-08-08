@@ -15,7 +15,6 @@ type Screen struct {
 	AnonymousId       string       `json:"anonymousId,omitempty"`
 	UserId            string       `json:"userId,omitempty"`
 	Name              string       `json:"name,omitempty"`
-	Timestamp         *time.Time   `json:"timestamp,omitempty"`
 	OriginalTimestamp time.Time    `json:"originalTimestamp,omitempty"`
 	SentAt            time.Time    `json:"sentAt,omitempty"`
 	Context           *Context     `json:"context,omitempty"`

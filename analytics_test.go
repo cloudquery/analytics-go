@@ -434,8 +434,6 @@ func TestTrackWithTimestamp(t *testing.T) {
 	})
 	defer client.Close()
 
-	ts := time.Date(2015, time.July, 10, 23, 0, 0, 0, time.UTC)
-
 	client.Enqueue(Track{
 		Event:       "Download",
 		UserId:      "123456",
@@ -445,7 +443,7 @@ func TestTrackWithTimestamp(t *testing.T) {
 			"version":     "1.1.0",
 			"platform":    "osx",
 		},
-		Timestamp: &ts,
+		OriginalTimestamp: time.Date(2015, time.July, 10, 23, 0, 0, 0, time.UTC),
 	})
 
 	res := string(<-body)
