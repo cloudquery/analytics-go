@@ -48,6 +48,15 @@ func makeMessageId(id string, def string) string {
 	return id
 }
 
+// Returns the time value passed as first argument, unless it's the zero-value,
+// in that case the default value passed as second argument is returned.
+func makeTimestamp(t time.Time, def time.Time) time.Time {
+	if t == (time.Time{}) {
+		return def
+	}
+	return t
+}
+
 // This structure represents objects sent to the /v1/batch endpoint. We don't
 // export this type because it's only meant to be used internally to send groups
 // of messages in one API call.

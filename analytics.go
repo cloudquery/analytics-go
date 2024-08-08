@@ -189,7 +189,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Alias:
 		m.Type = "alias"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
 		msg = m
@@ -197,7 +197,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Group:
 		m.Type = "group"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.AnonymousId = makeAnonymousId(m.AnonymousId)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
@@ -206,7 +206,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Identify:
 		m.Type = "identify"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
 		msg = m
@@ -214,7 +214,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Page:
 		m.Type = "page"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.AnonymousId = makeAnonymousId(m.AnonymousId)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
@@ -223,7 +223,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Screen:
 		m.Type = "screen"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.AnonymousId = makeAnonymousId(m.AnonymousId)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
@@ -232,7 +232,7 @@ func (c *client) Enqueue(msg Message) (err error) {
 	case Track:
 		m.Type = "track"
 		m.MessageId = makeMessageId(m.MessageId, id)
-		m.OriginalTimestamp = ts
+		m.OriginalTimestamp = makeTimestamp(m.OriginalTimestamp, ts)
 		m.AnonymousId = makeAnonymousId(m.AnonymousId)
 		m.Context = makeContext(m.Context)
 		m.Channel = "server"
