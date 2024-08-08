@@ -375,7 +375,6 @@ func (c *client) send(msgs []message, retryAttempt int) {
 		if err != nil {
 			c.errorf("%s - %v", err, msgs[i].msg)
 			c.notifyFailure([]message{msgs[i]}, err)
-			break
 		}
 	}
 
