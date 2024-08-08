@@ -74,6 +74,7 @@ func (m message) MarshalJSON() ([]byte, error) {
 	return m.json, nil
 }
 
+// setSentAt remarshalls the message with a new sentAt timestamp
 func (m *message) setSentAt(ts time.Time, maxBytes int) (err error) {
 	switch msg := m.msg.(type) {
 	case Alias:
