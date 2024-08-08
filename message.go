@@ -47,15 +47,6 @@ func makeMessageId(id string, def string) string {
 	return id
 }
 
-// Returns the time value passed as first argument, unless it's the zero-value,
-// in that case the default value passed as second argument is returned.
-func makeTimestamp(t time.Time, def time.Time) time.Time {
-	if t == (time.Time{}) {
-		return def
-	}
-	return t
-}
-
 // This structure represents objects sent to the /v1/batch endpoint. We don't
 // export this type because it's only meant to be used internally to send groups
 // of messages in one API call.
@@ -81,6 +72,36 @@ func makeMessage(m Message, maxBytes int) (msg message, err error) {
 
 func (m message) MarshalJSON() ([]byte, error) {
 	return m.json, nil
+}
+
+func (m *message) setSentAt(ts time.Time, maxBytes int) (err error) {
+	switch msg := m.msg.(type) {
+	case Alias:
+		msg.SentAt = ts
+		m.msg = msg
+	case Group:
+		msg.SentAt = ts
+		m.msg = msg
+	case Identify:
+		msg.SentAt = ts
+		m.msg = msg
+	case Page:
+		msg.SentAt = ts
+		m.msg = msg
+	case Screen:
+		msg.SentAt = ts
+		m.msg = msg
+	case Track:
+		msg.SentAt = ts
+		m.msg = msg
+	}
+
+	if m.json, err = json.Marshal(m.msg); err == nil {
+		if len(m.json) > maxBytes {
+			err = ErrMessageTooBig
+		}
+	}
+	return
 }
 
 func (m message) size() int {
